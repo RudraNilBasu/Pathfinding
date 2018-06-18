@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 1907509081}
   - component: {fileID: 1907509080}
   - component: {fileID: 1907509079}
+  - component: {fileID: 1907509083}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -536,3 +537,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1907509083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1907509078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40916c0fdbbbc924ab47985ebc497db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unwalkableMask:
+    serializedVersion: 2
+    m_Bits: 0
+  gridWorldSize: {x: 21, y: 21}
+  nodeSize: 0
