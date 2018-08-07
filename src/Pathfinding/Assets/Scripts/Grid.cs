@@ -27,17 +27,34 @@ public class Grid : MonoBehaviour {
 
     private void CreateGrids()
     {
-        // store grid world position and walkable (bool)
-        // to fill the array
+        grid = new Node[gridCountX, gridCountY];
+        float nodeRadius = nodeSize / 2; // Doing a `nodeSize / 2` for every x and y might be costly
 
-        // calculate the bottom left of the world
         Vector3 worldBottomLeftPosition = transform.position
-                                          - (Vector3.left * (gridWorldSize.x / 2))
-                                          - (Vector3.back * (gridWorldSize.y / 2));
+                                          - (Vector3.right * (gridWorldSize.x / 2))
+                                          - (Vector3.forward * (gridWorldSize.y / 2));
+
+        for (int x = 0; x < gridCountX; x++) {
+            for (int y = 0; y < gridCountY; y++) {
+                Vector3 _worldPosition = worldBottomLeftPosition
+                                         + Vector3.right * (x * nodeSize + nodeRadius)
+                                         + Vector3.forward * (y * nodeSize + nodeRadius);
+                bool _walkable = !Physics.CheckSphere(_worldPosition, nodeRadius, unwalkableMask);
+                grid[x, y] = new Node(_walkable, _worldPosition);
+            }
+        }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
+
+        if (grid != null) {
+            foreach (Node n in grid) {
+                Gizmos.color = (n.isWalkable()) ? Color.green: Color.red;
+                Gizmos.DrawCube(n.getWorldPosition(), Vector3.one * (nodeSize - .1f));
+            }
+        }
     }
 }
+

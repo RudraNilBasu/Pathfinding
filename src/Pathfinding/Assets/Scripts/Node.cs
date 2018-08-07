@@ -11,4 +11,14 @@ public class Node {
         walkable = _walkable;
         worldPosition = _worldPosition;
     }
+
+    public bool isWalkable()
+    {
+        return walkable;
+    }
+
+    public Vector3 getWorldPosition()
+    {
+        return worldPosition;
+    }
 }
