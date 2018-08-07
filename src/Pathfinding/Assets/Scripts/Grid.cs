@@ -56,5 +56,29 @@ public class Grid : MonoBehaviour {
             }
         }
     }
+
+    public Node NodeFromWorldPoint(Vector3 worldPosition)
+    {
+        Vector3 worldBottomLeftPosition = transform.position
+                                          - (Vector3.right * (gridWorldSize.x / 2))
+                                          - (Vector3.forward * (gridWorldSize.y / 2));
+
+        Vector3 diff = worldPosition - worldBottomLeftPosition;
+        int _x, _z;
+        _x = (int)(diff.x / nodeSize);
+        _z = (int)(diff.z / nodeSize);
+
+        if (_x < 0)
+            _x = 0;
+        if (_x > gridWorldSize.x)
+            _x =(int) gridWorldSize.x;
+
+        if (_z < 0)
+            _z = 0;
+        if (_z > gridWorldSize.y)
+            _z = (int)gridWorldSize.y;
+
+        return grid[_x, _z];
+    }
 }
 
